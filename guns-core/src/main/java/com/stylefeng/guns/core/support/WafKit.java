@@ -98,6 +98,7 @@ public class WafKit {
 	 * @return
 	 */
 	public static String stripSqlInjection(String value) {
+		// TODO: by ZhangXu 2018/8/16 16:13 :: 这个正则表达式什么意思？？？
 		return (null == value) ? null : value.replaceAll("('.+--)|(--)|(%7C)", ""); //value.replaceAll("('.+--)|(--)|(\\|)|(%7C)", "");
 	}
 

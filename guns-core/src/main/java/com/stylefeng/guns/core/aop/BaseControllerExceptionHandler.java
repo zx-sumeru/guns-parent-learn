@@ -24,6 +24,7 @@ public class BaseControllerExceptionHandler {
      * 拦截业务异常
      */
     @ExceptionHandler(GunsException.class)
+    // TODO: by ZhangXu 2018/8/16 11:38 :: @ResponseStatus将状态写入response！！！
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public ErrorTip notFount(GunsException e) {
