@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.system.warpper;
 
 import com.stylefeng.guns.core.common.constant.factory.ConstantFactory;
-import com.stylefeng.guns.core.base.warpper.BaseControllerWarpper;
+import com.stylefeng.guns.core.base.wrapper.BaseControllerWrapper;
 import com.stylefeng.guns.core.util.ToolUtil;
 
 import java.util.Map;
@@ -12,14 +12,14 @@ import java.util.Map;
  * @author fengshuonan
  * @date 2017年4月25日 18:10:31
  */
-public class DeptWarpper extends BaseControllerWarpper {
+public class DeptWrapper extends BaseControllerWrapper {
 
-    public DeptWarpper(Object list) {
+    public DeptWrapper(Object list) {
         super(list);
     }
 
     @Override
-    public void warpTheMap(Map<String, Object> map) {
+    public void wrapTheMap(Map<String, Object> map) {
 
         Integer pid = (Integer) map.get("pid");
 

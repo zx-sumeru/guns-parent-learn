@@ -12,7 +12,7 @@ import com.stylefeng.guns.core.node.ZTreeNode;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.model.Dept;
 import com.stylefeng.guns.modular.system.service.IDeptService;
-import com.stylefeng.guns.modular.system.warpper.DeptWarpper;
+import com.stylefeng.guns.modular.system.warpper.DeptWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -103,7 +103,7 @@ public class DeptController extends BaseController {
     @ResponseBody
     public Object list(String condition) {
         List<Map<String, Object>> list = this.deptService.list(condition);
-        return super.warpObject(new DeptWarpper(list));
+        return super.warpObject(new DeptWrapper(list));
     }
 
     /**

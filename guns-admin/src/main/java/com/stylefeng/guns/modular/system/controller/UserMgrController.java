@@ -22,7 +22,7 @@ import com.stylefeng.guns.modular.system.factory.UserFactory;
 import com.stylefeng.guns.modular.system.model.User;
 import com.stylefeng.guns.modular.system.service.IUserService;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
-import com.stylefeng.guns.modular.system.warpper.UserWarpper;
+import com.stylefeng.guns.modular.system.warpper.UserWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -162,11 +162,11 @@ public class UserMgrController extends BaseController {
     public Object list(@RequestParam(required = false) String name, @RequestParam(required = false) String beginTime, @RequestParam(required = false) String endTime, @RequestParam(required = false) Integer deptid) {
         if (ShiroKit.isAdmin()) {
             List<Map<String, Object>> users = userService.selectUsers(null, name, beginTime, endTime, deptid);
-            return new UserWarpper(users).warp();
+            return new UserWrapper(users).wrap();
         } else {
             DataScope dataScope = new DataScope(ShiroKit.getDeptDataScope());
             List<Map<String, Object>> users = userService.selectUsers(dataScope, name, beginTime, endTime, deptid);
-            return new UserWarpper(users).warp();
+            return new UserWrapper(users).wrap();
         }
     }
 

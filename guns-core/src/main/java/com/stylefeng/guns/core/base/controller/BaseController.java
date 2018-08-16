@@ -2,7 +2,7 @@ package com.stylefeng.guns.core.base.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.core.base.tips.SuccessTip;
-import com.stylefeng.guns.core.base.warpper.BaseControllerWarpper;
+import com.stylefeng.guns.core.base.wrapper.BaseControllerWrapper;
 import com.stylefeng.guns.core.page.PageInfoBT;
 import com.stylefeng.guns.core.support.HttpKit;
 import com.stylefeng.guns.core.util.FileUtil;
@@ -65,8 +65,8 @@ public class BaseController {
     /**
      * 包装一个list，让list增加额外属性
      */
-    protected Object warpObject(BaseControllerWarpper warpper) {
-        return warpper.warp();
+    protected Object warpObject(BaseControllerWrapper warpper) {
+        return warpper.wrap();
     }
 
     /**

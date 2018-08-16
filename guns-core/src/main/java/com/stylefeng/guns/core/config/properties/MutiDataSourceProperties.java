@@ -22,6 +22,7 @@ public class MutiDataSourceProperties {
 
     private String[] dataSourceNames = {"dataSourceGuns", "dataSourceBiz"};
 
+    // TODO: by ZhangXu 2018/8/16 下午10:26 :: 这个能够实现多数据源配置吗？？
     public void config(DruidDataSource dataSource) {
         dataSource.setUrl(url);
         dataSource.setUsername(username);

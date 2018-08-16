@@ -33,6 +33,7 @@ public class EhcacheFactory extends BaseCacheFactory {
 	private static final Logger log = LoggerFactory.getLogger(EhcacheFactory.class);
 	
 	private static CacheManager getCacheManager() {
+        // TODO: by ZhangXu 2018/8/16 下午9:42 :: create()方法内部已经synchronized了，此处还真的需要吗？？？不需要同步了
 		if (cacheManager == null) {
 			synchronized (EhcacheFactory.class) {
 				if (cacheManager == null) {
@@ -60,25 +61,30 @@ public class EhcacheFactory extends BaseCacheFactory {
 		return cache;
 	}
 	
-	public void put(String cacheName, Object key, Object value) {
+	@Override
+    public void put(String cacheName, Object key, Object value) {
 		getOrAddCache(cacheName).put(new Element(key, value));
 	}
 	
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T get(String cacheName, Object key) {
 		Element element = getOrAddCache(cacheName).get(key);
 		return element != null ? (T)element.getObjectValue() : null;
 	}
 	
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List getKeys(String cacheName) {
 		return getOrAddCache(cacheName).getKeys();
 	}
 	
+	@Override
 	public void remove(String cacheName, Object key) {
 		getOrAddCache(cacheName).remove(key);
 	}
 	
+	@Override
 	public void removeAll(String cacheName) {
 		getOrAddCache(cacheName).removeAll();
 	}

@@ -11,7 +11,7 @@ import com.stylefeng.guns.core.common.constant.state.BizLogType;
 import com.stylefeng.guns.core.support.BeanKit;
 import com.stylefeng.guns.modular.system.model.OperationLog;
 import com.stylefeng.guns.modular.system.service.IOperationLogService;
-import com.stylefeng.guns.modular.system.warpper.LogWarpper;
+import com.stylefeng.guns.modular.system.warpper.LogWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,7 +54,7 @@ public class LogController extends BaseController {
     public Object list(@RequestParam(required = false) String beginTime, @RequestParam(required = false) String endTime, @RequestParam(required = false) String logName, @RequestParam(required = false) Integer logType) {
         Page<OperationLog> page = new PageFactory<OperationLog>().defaultPage();
         List<Map<String, Object>> result = operationLogService.getOperationLogs(page, beginTime, endTime, logName, BizLogType.valueOf(logType), page.getOrderByField(), page.isAsc());
-        page.setRecords((List<OperationLog>) new LogWarpper(result).warp());
+        page.setRecords((List<OperationLog>) new LogWrapper(result).wrap());
         return super.packForBT(page);
     }
 
@@ -67,7 +67,7 @@ public class LogController extends BaseController {
     public Object detail(@PathVariable Integer id) {
         OperationLog operationLog = operationLogService.selectById(id);
         Map<String, Object> stringObjectMap = BeanKit.beanToMap(operationLog);
-        return super.warpObject(new LogWarpper(stringObjectMap));
+        return super.warpObject(new LogWrapper(stringObjectMap));
     }
 
     /**

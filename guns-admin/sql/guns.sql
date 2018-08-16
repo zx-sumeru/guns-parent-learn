@@ -26,7 +26,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `num` int(11) DEFAULT NULL COMMENT '排序',
+  `sortNum` int(11) DEFAULT NULL COMMENT '排序',
   `pid` int(11) DEFAULT NULL COMMENT '父部门id',
   `pids` varchar(255) DEFAULT NULL COMMENT '父级ids',
   `simplename` varchar(45) DEFAULT NULL COMMENT '简称',
@@ -50,7 +50,7 @@ INSERT INTO `sys_dept` VALUES ('27', '4', '24', '[0],[24],', '战略部', '战�
 DROP TABLE IF EXISTS `sys_dict`;
 CREATE TABLE `sys_dict` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `num` int(11) DEFAULT NULL COMMENT '排序',
+  `sortNum` int(11) DEFAULT NULL COMMENT '排序',
   `pid` int(11) DEFAULT NULL COMMENT '父级字典',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `tips` varchar(255) DEFAULT NULL COMMENT '提示',
@@ -122,8 +122,8 @@ CREATE TABLE `sys_menu` (
   `name` varchar(255) DEFAULT NULL COMMENT '菜单名称',
   `icon` varchar(255) DEFAULT NULL COMMENT '菜单图标',
   `url` varchar(255) DEFAULT NULL COMMENT 'url地址',
-  `num` int(65) DEFAULT NULL COMMENT '菜单排序号',
-  `levels` int(65) DEFAULT NULL COMMENT '菜单层级',
+  `sortNum` int(65) DEFAULT NULL COMMENT '菜单排序号',
+  `level` int(65) DEFAULT NULL COMMENT '菜单层级',
   `ismenu` int(11) DEFAULT NULL COMMENT '是否是菜单（1：是  0：不是）',
   `tips` varchar(255) DEFAULT NULL COMMENT '备注',
   `status` int(65) DEFAULT NULL COMMENT '菜单状态 :  1:启用   0:不启用',
@@ -327,7 +327,7 @@ INSERT INTO `sys_relation` VALUES ('3791', '149', '1');
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `num` int(11) DEFAULT NULL COMMENT '序号',
+  `sortNum` int(11) DEFAULT NULL COMMENT '序号',
   `pid` int(11) DEFAULT NULL COMMENT '父角色id',
   `name` varchar(255) DEFAULT NULL COMMENT '角色名称',
   `deptid` int(11) DEFAULT NULL COMMENT '部门名称',

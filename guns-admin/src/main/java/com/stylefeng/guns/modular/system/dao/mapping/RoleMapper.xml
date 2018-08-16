@@ -5,7 +5,7 @@
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.Role">
 		<id column="id" property="id" />
-		<result column="num" property="num" />
+		<result column="sortNum" property="sortNum" />
 		<result column="pid" property="pid" />
 		<result column="name" property="name" />
 		<result column="deptid" property="deptid" />
@@ -14,7 +14,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, num, pid, name, deptid, tips, version
+		id, sortNum, pid, name, deptid, tips, version
 	</sql>
 
 	<select id="selectRoles" resultType="map">
@@ -74,6 +74,6 @@
 		) r1 ON r.ID = r1.ID
 		ORDER BY
 		pId,
-		num ASC
+		sortNum ASC
 	</select>
 </mapper>

@@ -2,7 +2,7 @@ package com.stylefeng.guns.modular.system.warpper;
 
 import com.stylefeng.guns.core.common.constant.factory.ConstantFactory;
 import com.stylefeng.guns.modular.system.model.Dict;
-import com.stylefeng.guns.core.base.warpper.BaseControllerWarpper;
+import com.stylefeng.guns.core.base.wrapper.BaseControllerWrapper;
 import com.stylefeng.guns.core.util.ToolUtil;
 
 import java.util.List;
@@ -14,14 +14,14 @@ import java.util.Map;
  * @author fengshuonan
  * @date 2017年4月25日 18:10:31
  */
-public class DictWarpper extends BaseControllerWarpper {
+public class DictWrapper extends BaseControllerWrapper {
 
-    public DictWarpper(Object list) {
+    public DictWrapper(Object list) {
         super(list);
     }
 
     @Override
-    public void warpTheMap(Map<String, Object> map) {
+    public void wrapTheMap(Map<String, Object> map) {
         StringBuffer detail = new StringBuffer();
         Integer id = Integer.valueOf(map.get("id").toString());
         List<Dict> dicts = ConstantFactory.me().findInDict(id);

@@ -31,6 +31,7 @@ public class CollectionKit {
 		StringBuilder sb = new StringBuilder();
 		boolean isFirst = true;
 		for (T item : collection) {
+            // TODO: by ZhangXu 2018/8/16 下午11:37 :: 此处分隔符跳过第一个元素，使用了isTrue标识位
 			if (isFirst) {
 				isFirst = false;
 			} else {

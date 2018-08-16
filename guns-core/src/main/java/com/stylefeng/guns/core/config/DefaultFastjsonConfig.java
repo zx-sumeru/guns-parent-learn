@@ -49,13 +49,11 @@ public class DefaultFastjsonConfig {
                 SerializerFeature.WriteEnumUsingToString
         );
         fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
-        ValueFilter valueFilter = new ValueFilter() {
-            public Object process(Object o, String s, Object o1) {
-                if (null == o1) {
-                    o1 = "";
-                }
-                return o1;
+        ValueFilter valueFilter = (object, name, value) -> {
+            if (null == value) {
+                value = "";
             }
+            return value;
         };
         fastJsonConfig.setCharset(Charset.forName("utf-8"));
         fastJsonConfig.setSerializeFilters(valueFilter);
@@ -64,6 +62,7 @@ public class DefaultFastjsonConfig {
         SerializeConfig serializeConfig = SerializeConfig.globalInstance;
         serializeConfig.put(BigInteger.class, ToStringSerializer.instance);
         serializeConfig.put(Long.class, ToStringSerializer.instance);
+        // TODO: by ZhangXu 2018/8/16 下午10:35 :: Long.TYPE 获取long基本类型
         serializeConfig.put(Long.TYPE, ToStringSerializer.instance);
         fastJsonConfig.setSerializeConfig(serializeConfig);
         return fastJsonConfig;

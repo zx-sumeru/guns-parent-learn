@@ -1,7 +1,6 @@
 package com.stylefeng.guns.core.node;
 
 import com.stylefeng.guns.core.constant.IsMenu;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -30,7 +29,7 @@ public class MenuNode implements Comparable {
     /**
      * 按钮级别
      */
-    private Integer levels;
+    private Integer level;
 
     /**
      * 按钮级别
@@ -40,7 +39,7 @@ public class MenuNode implements Comparable {
     /**
      * 按钮的排序
      */
-    private Integer num;
+    private Integer sortNum;
 
     /**
      * 节点的url
@@ -72,12 +71,12 @@ public class MenuNode implements Comparable {
         this.parentId = parentId;
     }
 
-    public Integer getLevels() {
-        return levels;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setLevels(Integer levels) {
-        this.levels = levels;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getIcon() {
@@ -132,12 +131,12 @@ public class MenuNode implements Comparable {
         this.children = children;
     }
 
-    public Integer getNum() {
-        return num;
+    public Integer getSortNum() {
+        return sortNum;
     }
 
-    public void setNum(Integer num) {
-        this.num = num;
+    public void setSortNum(Integer sortNum) {
+        this.sortNum = sortNum;
     }
 
     public Integer getIsmenu() {
@@ -154,8 +153,8 @@ public class MenuNode implements Comparable {
                 "id=" + id +
                 ", parentId=" + parentId +
                 ", name='" + name + '\'' +
-                ", levels=" + levels +
-                ", num=" + num +
+                ", level=" + level +
+                ", sortNum=" + sortNum +
                 ", url='" + url + '\'' +
                 ", icon='" + icon + '\'' +
                 ", children=" + children +
@@ -172,18 +171,18 @@ public class MenuNode implements Comparable {
     @Override
     public int compareTo(Object o) {
         MenuNode menuNode = (MenuNode) o;
-        Integer num = menuNode.getNum();
-        Integer levels = menuNode.getLevels();
-        if (num == null) {
-            num = 0;
+        Integer sortNum = menuNode.getSortNum();
+        Integer level = menuNode.getLevel();
+        if (sortNum == null) {
+            sortNum = 0;
         }
-        if (levels == null) {
-            levels = 0;
+        if (level == null) {
+            level = 0;
         }
-        if (this.levels.compareTo(levels) == 0) {
-            return this.num.compareTo(num);
+        if (this.level.compareTo(level) == 0) {
+            return this.sortNum.compareTo(sortNum);
         } else {
-            return this.levels.compareTo(levels);
+            return this.level.compareTo(level);
         }
 
     }
@@ -199,7 +198,7 @@ public class MenuNode implements Comparable {
         nodes.removeIf(node -> node.getIsmenu() != IsMenu.YES.getCode());
         //对菜单排序，返回列表按菜单等级，序号的排序方式排列
         Collections.sort(nodes);
-        return mergeList(nodes, nodes.get(nodes.size() - 1).getLevels(), null);
+        return mergeList(nodes, nodes.get(nodes.size() - 1).getLevel(), null);
     }
 
     /**
@@ -216,7 +215,7 @@ public class MenuNode implements Comparable {
         Map<Long, List<MenuNode>> currentMap = new HashMap<>();
         //由于按等级从小到大排序，需要从后往前排序
         //判断该节点是否属于当前循环的等级,不等于则跳出循环
-        for (n = menuList.size() - 1; n >=0&&menuList.get(n).getLevels() == rank; n--) {
+        for (n = menuList.size() - 1; n >=0&&menuList.get(n).getLevel() == rank; n--) {
             //判断之前的调用是否有返回以该节点的id为key的map，有则设置为children列表。
             if (listMap != null && listMap.get(menuList.get(n).getId()) != null) {
                 menuList.get(n).setChildren(listMap.get(menuList.get(n).getId()));
@@ -231,7 +230,7 @@ public class MenuNode implements Comparable {
         if (n <0) {
             return menuList;
         } else {
-            return mergeList(menuList.subList(0, n+1), menuList.get(n).getLevels(), currentMap);
+            return mergeList(menuList.subList(0, n+1), menuList.get(n).getLevel(), currentMap);
         }
     }
 

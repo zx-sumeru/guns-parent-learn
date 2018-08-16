@@ -11,8 +11,8 @@
 		<result column="name" property="name" />
 		<result column="icon" property="icon" />
 		<result column="url" property="url" />
-		<result column="num" property="num" />
-		<result column="levels" property="levels" />
+		<result column="sortNum" property="sortNum" />
+		<result column="level" property="level" />
 		<result column="ismenu" property="ismenu" />
 		<result column="tips" property="tips" />
 		<result column="status" property="status" />
@@ -20,7 +20,7 @@
 	</resultMap>
 
     <sql id="Base_Column_List">
-        id, code, pcode, name, icon, url, num, levels,pcodes,
+        id, code, pcode, name, icon, url, sortNum, level,pcodes,
         tips, status,isopen,ismenu
     </sql>
 
@@ -33,7 +33,7 @@
             and (name like CONCAT('%',#{condition},'%') or code like CONCAT('%',#{condition},'%'))
         </if>
         <if test="level != null and level != ''">
-            and levels = #{level}
+            and level = #{level}
         </if>
     </select>
 
@@ -146,9 +146,9 @@
         ) AS parentId,
         m1.NAME as name,
         m1.url as url,
-        m1.levels as levels,
+        m1.level as level,
         m1.ismenu as ismenu,
-        m1.num as num
+        m1.sortNum as sortNum
         FROM
         sys_menu m1
         LEFT join sys_menu m2 ON m1.pcode = m2. CODE
@@ -171,7 +171,7 @@
         )
         ) m3 ON m1.id = m3.id
         where m1.ismenu = 1
-        order by levels,num asc
+        order by level,sortNum asc
     </select>
 
 </mapper>

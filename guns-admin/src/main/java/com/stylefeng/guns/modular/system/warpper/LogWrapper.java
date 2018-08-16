@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.system.warpper;
 
 import com.stylefeng.guns.core.common.constant.factory.ConstantFactory;
-import com.stylefeng.guns.core.base.warpper.BaseControllerWarpper;
+import com.stylefeng.guns.core.base.wrapper.BaseControllerWrapper;
 import com.stylefeng.guns.core.util.Contrast;
 import com.stylefeng.guns.core.util.ToolUtil;
 
@@ -13,14 +13,14 @@ import java.util.Map;
  * @author fengshuonan
  * @date 2017年4月5日22:56:24
  */
-public class LogWarpper extends BaseControllerWarpper {
+public class LogWrapper extends BaseControllerWrapper {
 
-    public LogWarpper(Object list) {
+    public LogWrapper(Object list) {
         super(list);
     }
 
     @Override
-    public void warpTheMap(Map<String, Object> map) {
+    public void wrapTheMap(Map<String, Object> map) {
         String message = (String) map.get("message");
 
         Integer userid = (Integer) map.get("userid");

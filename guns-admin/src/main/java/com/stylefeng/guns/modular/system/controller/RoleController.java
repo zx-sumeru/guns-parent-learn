@@ -19,7 +19,7 @@ import com.stylefeng.guns.modular.system.model.Role;
 import com.stylefeng.guns.modular.system.model.User;
 import com.stylefeng.guns.modular.system.service.IRoleService;
 import com.stylefeng.guns.modular.system.service.IUserService;
-import com.stylefeng.guns.modular.system.warpper.RoleWarpper;
+import com.stylefeng.guns.modular.system.warpper.RoleWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,7 +106,7 @@ public class RoleController extends BaseController {
     @ResponseBody
     public Object list(@RequestParam(required = false) String roleName) {
         List<Map<String, Object>> roles = this.roleService.selectRoles(super.getPara("roleName"));
-        return super.warpObject(new RoleWarpper(roles));
+        return super.warpObject(new RoleWrapper(roles));
     }
 
     /**

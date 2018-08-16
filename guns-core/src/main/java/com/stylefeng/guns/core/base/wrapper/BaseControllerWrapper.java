@@ -1,4 +1,4 @@
-package com.stylefeng.guns.core.base.warpper;
+package com.stylefeng.guns.core.base.wrapper;
 
 import java.util.List;
 import java.util.Map;
@@ -9,30 +9,30 @@ import java.util.Map;
  * @author fengshuonan
  * @date 2017年2月13日 下午10:49:36
  */
-public abstract class BaseControllerWarpper {
+public abstract class BaseControllerWrapper {
 
     public Object obj = null;
 
-    public BaseControllerWarpper(Object obj) {
+    public BaseControllerWrapper(Object obj) {
         this.obj = obj;
     }
 
     @SuppressWarnings("unchecked")
-    public Object warp() {
+    public Object wrap() {
         if (this.obj instanceof List) {
             List<Map<String, Object>> list = (List<Map<String, Object>>) this.obj;
             for (Map<String, Object> map : list) {
-                warpTheMap(map);
+                wrapTheMap(map);
             }
             return list;
         } else if (this.obj instanceof Map) {
             Map<String, Object> map = (Map<String, Object>) this.obj;
-            warpTheMap(map);
+            wrapTheMap(map);
             return map;
         } else {
             return this.obj;
         }
     }
 
-    protected abstract void warpTheMap(Map<String, Object> map);
+    protected abstract void wrapTheMap(Map<String, Object> map);
 }

@@ -81,6 +81,7 @@ public class Db<T> {
      * @date 2017年2月22日 下午10:45:51
      */
     public <E> E selectOneByCon(String condition, Object value) {
+        // TODO: by ZhangXu 2018/8/16 下午11:54 :: 此处每次检索所有符合条件的，再取第一条，会不会对性能有影响（查询了很多条只要一条）？？？
         List<?> results = selectOneByConList(condition, value);
         if (results != null && results.size() > 0) {
             return (E) results.get(0);

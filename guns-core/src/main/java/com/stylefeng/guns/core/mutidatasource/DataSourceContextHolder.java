@@ -8,6 +8,7 @@ package com.stylefeng.guns.core.mutidatasource;
  */
 public class DataSourceContextHolder {
 
+    // TODO: by ZhangXu 2018/8/16 下午10:44 :: 关注下ThreadLocal的使用！
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();
 
     /**

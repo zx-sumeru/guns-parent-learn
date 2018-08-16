@@ -17,7 +17,7 @@ import com.stylefeng.guns.core.support.BeanKit;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.model.Menu;
 import com.stylefeng.guns.modular.system.service.IMenuService;
-import com.stylefeng.guns.modular.system.warpper.MenuWarpper;
+import com.stylefeng.guns.modular.system.warpper.MenuWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -119,7 +119,7 @@ public class MenuController extends BaseController {
     @ResponseBody
     public Object list(@RequestParam(required = false) String menuName, @RequestParam(required = false) String level) {
         List<Map<String, Object>> menus = this.menuService.selectMenus(menuName, level);
-        return super.warpObject(new MenuWarpper(menus));
+        return super.warpObject(new MenuWrapper(menus));
     }
 
     /**
