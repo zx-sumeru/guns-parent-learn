@@ -86,10 +86,11 @@ public class HexKit {
 	 * @return 字符串
 	 */
 	public static String decodeHexStr(String hexStr, Charset charset) {
-		if(StrKit.isEmpty(hexStr)){
-			return hexStr;
-		}
-		return decodeHexStr(hexStr.toCharArray(), charset);
+		//if(StrKit.isEmpty(hexStr)){
+		//	return hexStr;
+		//}
+		//return decodeHexStr(hexStr.toCharArray(), charset);
+		return StrKit.isEmpty(hexStr) ? hexStr : decodeHexStr(hexStr.toCharArray(), charset);
 	}
 	
 	/**
@@ -108,7 +109,7 @@ public class HexKit {
 	 *
 	 * @param hexData 十六进制char[]
 	 * @return byte[]
-	 * @throws RuntimeException 如果源十六进制字符数组是一个奇怪的长度，将抛出运行时异常
+	 * @throws RuntimeException 如果源十六进制字符数组是一个奇数长度，将抛出运行时异常
 	 */
 	public static byte[] decodeHex(char[] hexData) {
 
@@ -152,10 +153,10 @@ public class HexKit {
 	 * @return 十六进制char[]
 	 */
 	private static char[] encodeHex(byte[] data, char[] toDigits) {
-		int l = data.length;
-		char[] out = new char[l << 1];
+		int length = data.length;
+		char[] out = new char[length << 1];
 		// two characters form the hex value.
-		for (int i = 0, j = 0; i < l; i++) {
+		for (int i = 0, j = 0; i < length; i++) {
 			out[j++] = toDigits[(0xF0 & data[i]) >>> 4];
 			out[j++] = toDigits[0x0F & data[i]];
 		}

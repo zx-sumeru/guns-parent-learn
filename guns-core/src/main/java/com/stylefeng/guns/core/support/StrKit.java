@@ -98,7 +98,7 @@ public class StrKit {
 	 * @return 是否为非空
 	 */
 	public static boolean notBlank(String str) {
-		return false == isBlank(str);
+		return !isBlank(str);
 	}
 
 	/**

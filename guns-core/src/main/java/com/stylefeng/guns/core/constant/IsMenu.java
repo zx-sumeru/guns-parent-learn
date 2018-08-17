@@ -6,6 +6,7 @@ package com.stylefeng.guns.core.constant;
  * @author fengshuonan
  * @date 2017年6月1日22:50:11
  */
+@SuppressWarnings("ALL")
 public enum IsMenu {
 
     YES(1, "是"),

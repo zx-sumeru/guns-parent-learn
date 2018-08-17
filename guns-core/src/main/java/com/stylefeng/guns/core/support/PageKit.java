@@ -43,15 +43,15 @@ public class PageKit {
 	 * 
 	 * @param totalCount
 	 *            总数
-	 * @param numPerPage
+	 * @param countPerPage
 	 *            每页数
 	 * @return 总页数
 	 */
-	public static int totalPage(int totalCount, int numPerPage) {
-		if (numPerPage == 0) {
+	public static int totalPage(int totalCount, int countPerPage) {
+		if (countPerPage == 0) {
 			return 0;
 		}
-		return totalCount % numPerPage == 0 ? (totalCount / numPerPage)
-				: (totalCount / numPerPage + 1);
+		return totalCount % countPerPage == 0 ? (totalCount / countPerPage)
+				: (totalCount / countPerPage + 1);
 	}
 }

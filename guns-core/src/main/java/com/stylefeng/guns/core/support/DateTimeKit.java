@@ -40,7 +40,9 @@ public class DateTimeKit {
 	/** 标准日期（不含时间）格式化器 */
 	// private final static SimpleDateFormat NORM_DATE_FORMAT = new SimpleDateFormat(NORM_DATE_PATTERN);
 	private static ThreadLocal<SimpleDateFormat> NORM_DATE_FORMAT = new ThreadLocal<SimpleDateFormat>(){
-		synchronized protected SimpleDateFormat initialValue() {
+        // TODO: by ZhangXu 2018/8/17 9:46 :: 此处好像不需要使用同步，ThreadLocal变量初始化
+		synchronized
+		protected SimpleDateFormat initialValue() {
 			return new SimpleDateFormat(NORM_DATE_PATTERN);
 		};
 	};

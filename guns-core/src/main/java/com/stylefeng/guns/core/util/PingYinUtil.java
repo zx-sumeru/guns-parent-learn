@@ -14,7 +14,7 @@ public class PingYinUtil {
 
 	public static void main(String[] args) {
 		String str = "这是一个测试";
-		System.out.println("中文首字母：" + getPYIndexStr(str, true));
+		System.out.println(str + "(中文首字母：)" + getPYIndexStr(str, true));
 	}
 
 	/**
@@ -22,26 +22,31 @@ public class PingYinUtil {
 	 */
 	public static String getPYIndexStr(String strChinese, boolean bUpCase) {
 		try {
-			StringBuffer buffer = new StringBuffer();
-			byte b[] = strChinese.getBytes("GBK");// 把中文转化成byte数组
-			for (int i = 0; i < b.length; i++) {
-				if ((b[i] & 255) > 128) {
-					int char1 = b[i++] & 255;
-					char1 <<= 8;// 左移运算符用“<<”表示，是将运算符左边的对象，向左移动运算符右边指定的位数，并且在低位补零。其实，向左移n位，就相当于乘上2的n次方
-					int chart = char1 + (b[i] & 255);
-					buffer.append(getPYIndexChar((char) chart, bUpCase));
+			StringBuffer stringBuffer = new StringBuffer();
+			byte[] bytes = strChinese.getBytes("GBK");// 把中文转化成byte数组
+			for (int i = 0; i < bytes.length; i++) {
+				if ((bytes[i] & 0xff) > 0x80) {
+					int char1 = bytes[i++] & 0xff;
+					// 左移运算符用“<<”表示，是将运算符左边的对象，向左移动运算符右边指定的位数，并且在低位补零。其实，向左移n位，就相当于乘上2的n次方
+					char1 <<= 0x8;
+					int chart = char1 + (bytes[i] & 0xff);
+					stringBuffer.append(getPYIndexChar((char) chart, bUpCase));
 					continue;
 				}
-				char c = (char) b[i];
-				if (!Character.isJavaIdentifierPart(c))// 确定指定字符是否可以是 Java
-														// 标识符中首字符以外的部分。
+				char c = (char) bytes[i];
+				// 确定指定字符是否可以是 Java 标识符中首字符以外的部分。
+				if (!Character.isJavaIdentifierPart(c))
+				{
 					c = 'A';
-				buffer.append(c);
+				}
+				stringBuffer.append(c);
 			}
-			return buffer.toString();
+			return stringBuffer.toString();
 		} catch (Exception e) {
-			System.out.println((new StringBuilder()).append("\u53D6\u4E2D\u6587\u62FC\u97F3\u6709\u9519")
-					.append(e.getMessage()).toString());
+			System.out.println(
+					(new StringBuilder()).append("取中文拼音有错")
+					.append(e.getMessage())
+							.toString());
 		}
 		return null;
 	}

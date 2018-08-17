@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author fengshuonan
  * @date 2016年11月17日 下午10:09:23
  */
-public class ResKit {
+public class ResourceKit {
 
     /**
      * @Description 批量获取ClassPath下的资源文件
@@ -32,7 +32,7 @@ public class ResKit {
      * @author fengshuonan
      */
     public static String getClassPathFile(String file) {
-		//return ResKit.class.getClassLoader().getResource(file).getPath();
+		//return ResourceKit.class.getClassLoader().getResource(file).getPath();
         return Thread.currentThread().getContextClassLoader().getResource(file).getPath();
     }
 }

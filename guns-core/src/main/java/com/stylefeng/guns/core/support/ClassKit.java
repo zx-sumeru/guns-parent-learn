@@ -28,8 +28,14 @@ public class ClassKit {
 	 * @return 是否为标准类
 	 */
 	public static boolean isNormalClass(Class<?> clazz) {
-		return null != clazz && false == clazz.isInterface() && false == isAbstract(clazz) && false == clazz.isEnum() && false == clazz.isArray() && false == clazz.isAnnotation() && false == clazz
-				.isSynthetic() && false == clazz.isPrimitive();
+		return null != clazz
+				&& !clazz.isInterface()
+				&& !isAbstract(clazz)
+				&& !clazz.isEnum()
+				&& !clazz.isArray()
+				&& !clazz.isAnnotation()
+				&& !clazz.isSynthetic()
+				&& !clazz.isPrimitive();
 	}
 	
 	/**
@@ -53,7 +59,8 @@ public class ClassKit {
 		if (null == clazz)
 			return null;
 		try {
-			return (T) Class.forName(clazz).newInstance();
+            //return (T) Class.forName(clazz).newInstance();
+            return (T) Class.forName(clazz).getConstructor().newInstance();
 		} catch (Exception e) {
 			throw new ToolBoxException(StrKit.format("Instance class [{}] error!", clazz), e);
 		}
@@ -69,7 +76,8 @@ public class ClassKit {
 		if (null == clazz)
 			return null;
 		try {
-			return (T) clazz.newInstance();
+			//return (T) clazz.newInstance();   @deprecated
+			return (T) clazz.getConstructor().newInstance();
 		} catch (Exception e) {
 			throw new ToolBoxException(StrKit.format("Instance class [{}] error!", clazz), e);
 		}
@@ -175,7 +183,7 @@ public class ClassKit {
 	 * @return 是否为非public
 	 */
 	public static boolean isNotPublic(Method method) {
-		return false == isPublic(method);
+		return !isPublic(method);
 	}
 	
 	/**

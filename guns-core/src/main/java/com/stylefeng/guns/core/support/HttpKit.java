@@ -54,7 +54,7 @@ public class HttpKit {
     }
 
     /**
-     * 获取 HttpServletRequest
+     * 获取 HttpServletResponse
      */
     public static HttpServletResponse getResponse() {
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
@@ -81,17 +81,18 @@ public class HttpKit {
         String result = "";
         BufferedReader in = null;
         try {
-            StringBuffer query = new StringBuffer();
+            StringBuffer stringBuffer = new StringBuffer();
 
-            for (Map.Entry<String, String> kv : param.entrySet()) {
-                query.append(URLEncoder.encode(kv.getKey(), "UTF-8") + "=");
-                query.append(URLEncoder.encode(kv.getValue(), "UTF-8") + "&");
+            for (Map.Entry<String, String> entry : param.entrySet()) {
+                stringBuffer.append(URLEncoder.encode(entry.getKey(), "UTF-8") + "=");
+                stringBuffer.append(URLEncoder.encode(entry.getValue(), "UTF-8") + "&");
             }
-            if (query.lastIndexOf("&") > 0) {
-                query.deleteCharAt(query.length() - 1);
+            //删除最后一个多余的 “&”
+            if (stringBuffer.lastIndexOf("&") > 0) {
+                stringBuffer.deleteCharAt(stringBuffer.length() - 1);
             }
 
-            String urlNameString = url + "?" + query.toString();
+            String urlNameString = url + "?" + stringBuffer.toString();
             URL realUrl = new URL(urlNameString);
             // 打开和URL之间的连接
             URLConnection connection = realUrl.openConnection();
@@ -134,17 +135,17 @@ public class HttpKit {
      * 向指定 URL 发送POST方法的请求
      *
      * @param url 发送请求的 URL
-     * @param param  请求参数
+     * @param params  请求参数
      * @return 所代表远程资源的响应结果
      */
-    public static String sendPost(String url, Map<String, String> param) {
+    public static String sendPost(String url, Map<String, String> params) {
         PrintWriter out = null;
         BufferedReader in = null;
         String result = "";
         try {
             String para = "";
-            for (String key : param.keySet()) {
-                para += (key + "=" + param.get(key) + "&");
+            for (String key : params.keySet()) {
+                para += (key + "=" + params.get(key) + "&");
             }
             if (para.lastIndexOf("&") > 0) {
                 para = para.substring(0, para.length() - 1);
@@ -157,13 +158,14 @@ public class HttpKit {
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+
             // 发送POST请求必须设置如下两行
             conn.setDoOutput(true);
             conn.setDoInput(true);
             // 获取URLConnection对象对应的输出流
             out = new PrintWriter(conn.getOutputStream());
             // 发送请求参数
-            out.print(param);
+            out.print(params);
             // flush输出流的缓冲
             out.flush();
             // 定义BufferedReader输入流来读取URL的响应
